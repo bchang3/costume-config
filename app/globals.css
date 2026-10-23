@@ -1,26 +1,61 @@
 @import "tailwindcss";
 
+/* Fireboy & Watergirl "forest temple" palette: sandy stone, dark brown ink, gold trim */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #c9b787;
+  --foreground: #3b2e1c;
+  --stone: #f1e7cb;
+  --stone-edge: #b9a678;
+  --gold: #e0b43a;
+  color-scheme: light;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-stone: var(--stone);
+  --color-stone-edge: var(--stone-edge);
+  --color-gold: var(--gold);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-temple: var(--font-cinzel);
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
+  /* Staggered temple bricks: each brick = shadow, highlight, face (bevel), on darker mortar.
+     Vignette on top darkens the edges like the game's walls. */
+  background-image:
+    radial-gradient(ellipse at center, transparent 45%, rgba(60, 40, 10, 0.35) 100%),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='80'><rect width='160' height='80' fill='%23a8946a'/><g><rect x='2' y='2' width='76' height='36' fill='%23968356'/><rect x='2' y='2' width='74' height='34' fill='%23efe4c4'/><rect x='4' y='4' width='72' height='32' fill='%23dccc9f'/></g><g><rect x='82' y='2' width='76' height='36' fill='%23968356'/><rect x='82' y='2' width='74' height='34' fill='%23efe4c4'/><rect x='84' y='4' width='72' height='32' fill='%23d5c493'/></g><g><rect x='-38' y='42' width='76' height='36' fill='%23968356'/><rect x='-38' y='42' width='74' height='34' fill='%23efe4c4'/><rect x='-36' y='44' width='72' height='32' fill='%23d9c899'/></g><g><rect x='42' y='42' width='76' height='36' fill='%23968356'/><rect x='42' y='42' width='74' height='34' fill='%23efe4c4'/><rect x='44' y='44' width='72' height='32' fill='%23e0d1a6'/></g><g><rect x='122' y='42' width='76' height='36' fill='%23968356'/><rect x='122' y='42' width='74' height='34' fill='%23efe4c4'/><rect x='124' y='44' width='72' height='32' fill='%23d9c899'/></g><circle cx='22' cy='14' r='1.5' fill='%23b8a576'/><circle cx='118' cy='26' r='2' fill='%23b8a576'/><circle cx='70' cy='60' r='1.5' fill='%23b8a576'/><path d='M100 8 l6 5 l-3 6' stroke='%23b3a06f' stroke-width='1' fill='none'/></svg>");
+  background-size: 100% 100%, 160px 80px;
+  background-attachment: fixed, scroll;
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Carved stone slab: light top bevel, dark bottom bevel, drop shadow */
+.stone-panel {
+  background: linear-gradient(180deg, #f6eed6 0%, #ebdfbd 100%);
+  box-shadow:
+    inset 0 3px 0 rgba(255, 255, 255, 0.7),
+    inset 0 -4px 0 rgba(110, 85, 40, 0.35),
+    0 6px 0 rgba(70, 50, 20, 0.35),
+    0 10px 20px rgba(40, 25, 5, 0.35);
+}
+
+/* Gold logo lettering with dark outline, like the game title */
+.temple-title {
+  font-family: var(--font-cinzel), serif;
+  color: var(--gold);
+  text-shadow:
+    -2px -2px 0 #3b2a10, 2px -2px 0 #3b2a10, -2px 2px 0 #3b2a10, 2px 2px 0 #3b2a10,
+    0 4px 0 #3b2a10, 0 6px 8px rgba(0, 0, 0, 0.4);
+  letter-spacing: 0.04em;
+}
+
+/* Subtitle plaque so it stays readable over the bricks */
+.stone-plaque {
+  background: rgba(241, 231, 203, 0.85);
+  box-shadow: inset 0 -2px 0 rgba(110, 85, 40, 0.3);
 }
