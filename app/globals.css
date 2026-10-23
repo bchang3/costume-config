@@ -1,47 +1,45 @@
 @import "tailwindcss";
 
-/* Fireboy & Watergirl "forest temple" palette: sandy stone, dark brown ink, gold trim */
+/* Fireboy & Watergirl "forest temple" palette: dark olive-brown stone, cream ink, gold trim */
 :root {
-  --background: #c9b787;
-  --foreground: #3b2e1c;
-  --stone: #f1e7cb;
-  --stone-edge: #b9a678;
-  --gold: #e0b43a;
-  color-scheme: light;
+  --background: #3b301b;
+  --foreground: #f3e6c4;
+  --stone-edge: #2a2112;
+  --gold: #f0c53f;
+  color-scheme: dark;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-stone: var(--stone);
   --color-stone-edge: var(--stone-edge);
   --color-gold: var(--gold);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-poppins);
   --font-mono: var(--font-geist-mono);
   --font-temple: var(--font-cinzel);
 }
 
 body {
   background-color: var(--background);
-  /* Staggered temple bricks: each brick = shadow, highlight, face (bevel), on darker mortar.
+  /* Staggered temple bricks: each brick = shadow, highlight, face (bevel), on dark mortar.
      Vignette on top darkens the edges like the game's walls. */
   background-image:
-    radial-gradient(ellipse at center, transparent 45%, rgba(60, 40, 10, 0.35) 100%),
-    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='80'><rect width='160' height='80' fill='%23a8946a'/><g><rect x='2' y='2' width='76' height='36' fill='%23968356'/><rect x='2' y='2' width='74' height='34' fill='%23efe4c4'/><rect x='4' y='4' width='72' height='32' fill='%23dccc9f'/></g><g><rect x='82' y='2' width='76' height='36' fill='%23968356'/><rect x='82' y='2' width='74' height='34' fill='%23efe4c4'/><rect x='84' y='4' width='72' height='32' fill='%23d5c493'/></g><g><rect x='-38' y='42' width='76' height='36' fill='%23968356'/><rect x='-38' y='42' width='74' height='34' fill='%23efe4c4'/><rect x='-36' y='44' width='72' height='32' fill='%23d9c899'/></g><g><rect x='42' y='42' width='76' height='36' fill='%23968356'/><rect x='42' y='42' width='74' height='34' fill='%23efe4c4'/><rect x='44' y='44' width='72' height='32' fill='%23e0d1a6'/></g><g><rect x='122' y='42' width='76' height='36' fill='%23968356'/><rect x='122' y='42' width='74' height='34' fill='%23efe4c4'/><rect x='124' y='44' width='72' height='32' fill='%23d9c899'/></g><circle cx='22' cy='14' r='1.5' fill='%23b8a576'/><circle cx='118' cy='26' r='2' fill='%23b8a576'/><circle cx='70' cy='60' r='1.5' fill='%23b8a576'/><path d='M100 8 l6 5 l-3 6' stroke='%23b3a06f' stroke-width='1' fill='none'/></svg>");
+    radial-gradient(ellipse at center, transparent 40%, rgba(0, 0, 0, 0.5) 100%),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='80'><rect width='160' height='80' fill='%23281f0f'/><g><rect x='2' y='2' width='76' height='36' fill='%231c150a'/><rect x='2' y='2' width='74' height='34' fill='%23857048'/><rect x='4' y='4' width='72' height='32' fill='%235e4d2b'/></g><g><rect x='82' y='2' width='76' height='36' fill='%231c150a'/><rect x='82' y='2' width='74' height='34' fill='%23857048'/><rect x='84' y='4' width='72' height='32' fill='%23564627'/></g><g><rect x='-38' y='42' width='76' height='36' fill='%231c150a'/><rect x='-38' y='42' width='74' height='34' fill='%23857048'/><rect x='-36' y='44' width='72' height='32' fill='%23615030'/></g><g><rect x='42' y='42' width='76' height='36' fill='%231c150a'/><rect x='42' y='42' width='74' height='34' fill='%23857048'/><rect x='44' y='44' width='72' height='32' fill='%23594a29'/></g><g><rect x='122' y='42' width='76' height='36' fill='%231c150a'/><rect x='122' y='42' width='74' height='34' fill='%23857048'/><rect x='124' y='44' width='72' height='32' fill='%23615030'/></g><circle cx='22' cy='14' r='1.5' fill='%23473a20'/><circle cx='118' cy='26' r='2' fill='%23473a20'/><circle cx='70' cy='60' r='1.5' fill='%23473a20'/><path d='M100 8 l6 5 l-3 6' stroke='%23413519' stroke-width='1' fill='none'/></svg>");
   background-size: 100% 100%, 160px 80px;
   background-attachment: fixed, scroll;
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-poppins), Arial, Helvetica, sans-serif;
 }
 
 /* Carved stone slab: light top bevel, dark bottom bevel, drop shadow */
 .stone-panel {
-  background: linear-gradient(180deg, #f6eed6 0%, #ebdfbd 100%);
+  background: linear-gradient(180deg, #6b5833 0%, #4f4022 100%);
   box-shadow:
-    inset 0 3px 0 rgba(255, 255, 255, 0.7),
-    inset 0 -4px 0 rgba(110, 85, 40, 0.35),
-    0 6px 0 rgba(70, 50, 20, 0.35),
-    0 10px 20px rgba(40, 25, 5, 0.35);
+    inset 0 3px 0 rgba(255, 225, 150, 0.25),
+    inset 0 -4px 0 rgba(0, 0, 0, 0.4),
+    0 6px 0 rgba(0, 0, 0, 0.45),
+    0 10px 20px rgba(0, 0, 0, 0.5);
 }
 
 /* Gold logo lettering with dark outline, like the game title */
@@ -49,13 +47,21 @@ body {
   font-family: var(--font-cinzel), serif;
   color: var(--gold);
   text-shadow:
-    -2px -2px 0 #3b2a10, 2px -2px 0 #3b2a10, -2px 2px 0 #3b2a10, 2px 2px 0 #3b2a10,
-    0 4px 0 #3b2a10, 0 6px 8px rgba(0, 0, 0, 0.4);
+    -2px -2px 0 #1f1608, 2px -2px 0 #1f1608, -2px 2px 0 #1f1608, 2px 2px 0 #1f1608,
+    0 4px 0 #1f1608, 0 6px 8px rgba(0, 0, 0, 0.5);
   letter-spacing: 0.04em;
 }
 
 /* Subtitle plaque so it stays readable over the bricks */
 .stone-plaque {
-  background: rgba(241, 231, 203, 0.85);
-  box-shadow: inset 0 -2px 0 rgba(110, 85, 40, 0.3);
+  background: rgba(31, 22, 8, 0.65);
+  box-shadow: inset 0 1px 0 rgba(255, 225, 150, 0.2);
+}
+
+/* Cream inset fields/buttons carved into the slab */
+.stone-input {
+  background: #f3e6c4;
+  color: #2b2010;
+  border-color: var(--stone-edge);
+  box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.25);
 }

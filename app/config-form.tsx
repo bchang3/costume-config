@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { FireboyIcon, WatergirlIcon } from "./icons";
 
 const API = "https://roomify.overunderdev.com/config";
 
@@ -31,9 +32,26 @@ const FIELDS: Field[] = [
   { key: "smoothing", label: "Smoothing", hint: "Lower = smoother but slower", min: 0.001, max: 1, step: 0.001 },
 ];
 
-const THEME: Record<Color, { name: string; accent: string; ring: string; button: string }> = {
-  red: { name: "Fireboy", accent: "accent-red-600", ring: "border-red-600", button: "bg-red-600 active:bg-red-700" },
-  blue: { name: "Watergirl", accent: "accent-blue-600", ring: "border-blue-600", button: "bg-blue-600 active:bg-blue-700" },
+const THEME: Record<
+  Color,
+  { name: string; Icon: typeof FireboyIcon; title: string; accent: string; ring: string; button: string }
+> = {
+  red: {
+    name: "Fireboy",
+    Icon: FireboyIcon,
+    title: "text-orange-300",
+    accent: "accent-red-500",
+    ring: "border-red-600",
+    button: "bg-red-600 active:bg-red-700",
+  },
+  blue: {
+    name: "Watergirl",
+    Icon: WatergirlIcon,
+    title: "text-sky-300",
+    accent: "accent-sky-500",
+    ring: "border-sky-600",
+    button: "bg-sky-600 active:bg-sky-700",
+  },
 };
 
 function validate(c: Config): string | null {
@@ -86,7 +104,8 @@ function ColorSection({ color, initial }: { color: Color; initial: Config }) {
 
   return (
     <section className={`stone-panel rounded-2xl border-2 ${theme.ring} p-4`}>
-      <h2 className="mb-3 font-temple text-xl font-bold">
+      <h2 className={`mb-3 flex items-center gap-2 font-temple text-xl font-bold ${theme.title}`}>
+        <theme.Icon className="h-12 w-auto shrink-0" />
         {theme.name} <span className="text-sm font-normal opacity-70">({color})</span>
       </h2>
 
@@ -121,15 +140,15 @@ function ColorSection({ color, initial }: { color: Color; initial: Config }) {
                 step={f.step}
                 value={config[f.key]}
                 onChange={(e) => set(f.key, e.target.value)}
-                className="w-20 rounded-lg border border-stone-edge bg-white px-2 py-2 text-right text-base tabular-nums"
+                className="w-20 rounded-lg stone-input border px-2 py-2 text-right text-base tabular-nums"
               />
             </div>
           </label>
         ))}
 
-        {invalid && <p className="text-sm text-amber-700">{invalid}</p>}
+        {invalid && <p className="text-sm text-amber-300">{invalid}</p>}
         {status && (
-          <p className={`text-sm ${status.kind === "ok" ? "text-green-700" : "text-red-700"}`}>{status.text}</p>
+          <p className={`text-sm ${status.kind === "ok" ? "text-green-300" : "text-red-300"}`}>{status.text}</p>
         )}
 
         <div className="flex gap-3">
@@ -144,7 +163,7 @@ function ColorSection({ color, initial }: { color: Color; initial: Config }) {
             type="button"
             disabled={busy}
             onClick={() => send("/reset", "POST")}
-            className="rounded-xl border border-stone-edge bg-white px-4 py-3 font-medium disabled:opacity-40"
+            className="rounded-xl stone-input border px-4 py-3 font-medium disabled:opacity-40"
           >
             Reset
           </button>
@@ -168,7 +187,7 @@ export default function ConfigForm() {
       .catch((e) => setError(e instanceof Error ? e.message : "Failed to load"));
   }, []);
 
-  if (error) return <p className="text-red-700">Couldn&apos;t load config: {error}</p>;
+  if (error) return <p className="text-red-300">Couldn&apos;t load config: {error}</p>;
   if (!configs) return <p className="opacity-70">Loading…</p>;
 
   return (
